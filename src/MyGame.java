@@ -2,10 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.EventObject;
-
-import static java.lang.Thread.*;
 
 
 public class MyGame extends JFrame implements ActionListener {
@@ -19,7 +15,7 @@ public class MyGame extends JFrame implements ActionListener {
     int gameChances[]={2,2,2,2,2,2,2,2,2};
     int activePlayer=0;
 
-    int wps[][]={
+    int wps[][]={   //winning positions
             {0, 1, 2},
             {3, 4, 5},
             {6, 7, 8},
@@ -49,15 +45,13 @@ public class MyGame extends JFrame implements ActionListener {
         this.setLayout(new BorderLayout());
         //north heading
         heading=new JLabel("Tic Tac Toe");
-        //heading.setIcon(new ImageIcon("src/logo.png"));
-
         heading.setFont(font);
         heading.setHorizontalAlignment(SwingConstants.CENTER);
         heading.setForeground(Color.white);
         heading.setHorizontalTextPosition(SwingConstants.CENTER);
         heading.setVerticalTextPosition(SwingConstants.BOTTOM);
 
-        this.add(heading,BorderLayout.NORTH);
+        this.add(heading,BorderLayout.NORTH);  //add name to north
 
 
         /// panel Section
@@ -90,7 +84,7 @@ public class MyGame extends JFrame implements ActionListener {
             return;
         }
 
-        if(gameChances[name]==2)
+        if(gameChances[name]==2)  //position not occupied
         {
             if(activePlayer==1)
             {
@@ -105,16 +99,16 @@ public class MyGame extends JFrame implements ActionListener {
             }
 
             //find winner...
-            for(int[]temp:wps){
+            for(int[]temp:wps){  //every pos of wps
                 if((gameChances[temp[0]]==gameChances[temp[1]])&& (gameChances[temp[1]]==gameChances[temp[2]]) && gameChances[temp[2]]!=2){
                     winner=gameChances[temp[0]];
                     gameOver=true;
                     JOptionPane.showMessageDialog(null,"Player "+winner+" has won the game...");
                     int i=JOptionPane.showConfirmDialog(this,"Do you want to play more??");
-                    if(i==0){
+                    if(i==0){  //yes
                         this.setVisible(false);
                         new MyGame();
-                    }else if(i==1){
+                    }else if(i==1){   //no (exit)
                         System.exit(3466);
                     }
                     else{
@@ -124,7 +118,7 @@ public class MyGame extends JFrame implements ActionListener {
                     break;
                 }
             }
-            //...........draw logic
+            //draw logic
             int c=0;
             for(int x:gameChances){
                 if(x==2){
@@ -135,11 +129,10 @@ public class MyGame extends JFrame implements ActionListener {
             if(c==0 && gameOver==false){
                 JOptionPane.showMessageDialog(null,"It's Draw...");
                 int i=JOptionPane.showConfirmDialog(this,"Play more.??");
-                if (i == 0) {
-
+                if (i == 0) {  // play more-yes
                     this.setVisible(false);
                     new MyGame();
-                } else if(i==1){
+                } else if(i==1){  //play more-no
                     System.exit((34665));
                 } else{
 
